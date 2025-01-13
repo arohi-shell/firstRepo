@@ -20,25 +20,24 @@ SET DayNames='Mon;Tue;Wed;Thu;Fri;Sat;Sun';
 SET LongDayNames='Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday';
 SET NumericalAbbreviation='3:k;6:M;9:G;12:T;15:P;18:E;21:Z;24:Y;-3:m;-6:μ;-9:n;-12:p;-15:f;-18:a;-21:z;-24:y';
 
-///$tab compare
-// Load the dev table
+///$tab Section
 LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_DEV';
 
-LOAD 
-UC_ID as UC_ID_dev,
-UNIT_FROM as UNIT_FROM_dev,
-UNIT_TO as UNIT_TO_dev,
-CONVERSION_FACTOR as CONVERSION_FACTOR_dev,
-RISK_CATEGORY as RISK_CATEGORY_dev,
-ACTIVE_INDICATOR as ACTIVE_INDICATOR_dev,
-REGION_KEY as REGION_KEY_dev,
-STANDARD_COMMODITY_CODE as STANDARD_COMMODITY_CODE_dev,
-deleted as deleted_dev,
-version as version_dev,
-changed_by as changed_by_dev,
-updated_at as updated_at_dev;
+LOAD UC_ID AS UC_ID_dev, 
+    UNIT_FROM AS UNIT_FROM_dev, 
+    UNIT_TO AS UNIT_TO_dev, 
+    CONVERSION_FACTOR AS CONVERSION_FACTOR_dev, 
+    RISK_CATEGORY AS RISK_CATEGORY_dev, 
+    ACTIVE_INDICATOR AS ACTIVE_INDICATOR_dev, 
+    REGION_KEY AS REGION_KEY_dev, 
+    STANDARD_COMMODITY_CODE AS STANDARD_COMMODITY_CODE_dev, 
+    deleted AS deleted_dev, 
+    version AS version_dev, 
+    changed_by AS changed_by_dev, 
+    updated_at AS updated_at_dev;
 
-[we_Data_SET_UNIT_CONVERSION]:
+
+[we_data_SET_UNIT_CONVERSION]:
 SELECT \"UC_ID\",
 \t\"UNIT_FROM\",
 \t\"UNIT_TO\",
@@ -51,24 +50,22 @@ SELECT \"UC_ID\",
 \tversion,
 \t\"changed_by\",
 \t\"updated_at\"
-FROM \"shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs\".\"MRR_WB\".\"we_Data_SET_UNIT_CONVERSION\";
+FROM \"shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs\".\"MRR_WB\".\"we_data_SET_UNIT_CONVERSION\";
 
-
-// Load the prod table
 LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_PROD';
 
-LOAD UC_ID as UC_ID_prod,
-UNIT_FROM as UNIT_FROM_prod,
-UNIT_TO as UNIT_TO_prod,
-CONVERSION_FACTOR as CONVERSION_FACTOR_prod,
-RISK_CATEGORY as RISK_CATEGORY_prod,
-ACTIVE_INDICATOR as ACTIVE_INDICATOR_prod,
-REGION_KEY as REGION_KEY_prod,
-STANDARD_COMMODITY_CODE as STANDARD_COMMODITY_CODE_prod,
-deleted as deleted_prod,
-version as version_prod,
-changed_by as changed_by_prod,
-updated_at as updated_at_prod;
+LOAD UC_ID AS UC_ID_prod, 
+    UNIT_FROM AS UNIT_FROM_prod, 
+    UNIT_TO AS UNIT_TO_prod, 
+    CONVERSION_FACTOR AS CONVERSION_FACTOR_prod, 
+    RISK_CATEGORY AS RISK_CATEGORY_prod, 
+    ACTIVE_INDICATOR AS ACTIVE_INDICATOR_prod, 
+    REGION_KEY AS REGION_KEY_prod, 
+    STANDARD_COMMODITY_CODE AS STANDARD_COMMODITY_CODE_prod, 
+    deleted AS deleted_prod, 
+    version AS version_prod, 
+    changed_by AS changed_by_prod, 
+    updated_at AS updated_at_prod;
 
 
 [we_data_SET_UNIT_CONVERSION]:
@@ -86,389 +83,7 @@ SELECT \"UC_ID\",
 \t\"updated_at\"
 FROM \"shell-31-eun-sqdw-aouyninwxgbsssfsxvov\".\"MRR_WB\".\"we_data_SET_UNIT_CONVERSION\";
 
-
-// Join the dev and prod tables
-// LEFT JOIN ([we_data_SET_HOLIDAY_DATE_REGION_dev])
-// LOAD 
-//     HOLIDAY_ID_prod, 
-//     REGION_KEY_prod, 
-//     HOLIDAY_DATE_prod, 
-//     DESCRIPTION_TEXT_prod, 
-//     COMMENT_TEXT_prod, 
-//     ACTIVE_INDICATOR_prod, 
-//     deleted_prod, 
-//     version_prod, 
-//     changed_by_prod, 
-//     updated_at_prod
-// RESIDENT [we_data_SET_HOLIDAY_DATE_REGION_prod];
-
-// Create a comparison table
-// ComparisonTable:
-// LOAD 
-//     HOLIDAY_ID_dev, 
-//     REGION_KEY_dev, 
-//     HOLIDAY_DATE_dev, 
-//     DESCRIPTION_TEXT_dev, 
-//     COMMENT_TEXT_dev, 
-//     ACTIVE_INDICATOR_dev, 
-//     deleted_dev, 
-//     version_dev, 
-//     changed_by_dev, 
-//     updated_at_dev,
-//     HOLIDAY_ID_prod, 
-//     REGION_KEY_prod, 
-//     HOLIDAY_DATE_prod, 
-//     DESCRIPTION_TEXT_prod, 
-//     COMMENT_TEXT_prod, 
-//     ACTIVE_INDICATOR_prod, 
-//     deleted_prod, 
-//     version_prod, 
-//     changed_by_prod, 
-//     updated_at_prod,
-//     IF(HOLIDAY_ID_dev = HOLIDAY_ID_prod AND 
-//        REGION_KEY_dev = REGION_KEY_prod AND 
-//        HOLIDAY_DATE_dev = HOLIDAY_DATE_prod AND 
-//        DESCRIPTION_TEXT_dev = DESCRIPTION_TEXT_prod AND 
-//        COMMENT_TEXT_dev = COMMENT_TEXT_prod AND 
-//        ACTIVE_INDICATOR_dev = ACTIVE_INDICATOR_prod AND 
-//        deleted_dev = deleted_prod AND 
-//        version_dev = version_prod AND 
-//        changed_by_dev = changed_by_prod AND 
-//        updated_at_dev = updated_at_prod, 'Match', 'Mismatch') AS ComparisonResult
-// RESIDENT [we_data_SET_HOLIDAY_DATE_REGION_dev];
 
 ///$tab exit script
-Exit script;
-///$tab DEV
-LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_DEV';
-
-LOAD CURVE_COUNTRY_MAP_ID, 
-\tREGION_KEY, 
-\tCURVE, 
-\tQP_CURVE, 
-\tCOUNTRY, 
-\tACTIVE_INDICATOR, 
-\tdeleted, 
-\tversion, 
-\tchanged_by, 
-\tupdated_at;
-
-[we_data_SET_CURVE_COUNTRY_MAPPING]:
-SELECT \"CURVE_COUNTRY_MAP_ID\",
-\t\"REGION_KEY\",
-\tCURVE,
-\t\"QP_CURVE\",
-\tCOUNTRY,
-\t\"ACTIVE_INDICATOR\",
-\tdeleted,
-\tversion,
-\t\"changed_by\",
-\t\"updated_at\"
-FROM \"shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs\".\"MRR_WB\".\"we_data_SET_CURVE_COUNTRY_MAPPING\";
-
-LOAD CURVE_COUNTRY_MAP_ID, 
-\tREGION_KEY, 
-\tCURVE, 
-\tQP_CURVE, 
-\tCOUNTRY, 
-\tACTIVE_INDICATOR, 
-\tdeleted, 
-\tversion, 
-\tchanged_by, 
-\tupdated_at;
-
-[we_fullData_SET_CURVE_COUNTRY_MAPPING]:
-SELECT \"CURVE_COUNTRY_MAP_ID\",
-\t\"REGION_KEY\",
-\tCURVE,
-\t\"QP_CURVE\",
-\tCOUNTRY,
-\t\"ACTIVE_INDICATOR\",
-\tdeleted,
-\tversion,
-\t\"changed_by\",
-\t\"updated_at\"
-FROM \"shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs\".\"MRR_WB\".\"we_fullData_SET_CURVE_COUNTRY_MAPPING\";
-
-LOAD CURVE_COUNTRY_MAP_ID, 
-\tREGION_KEY, 
-\tCURVE, 
-\tQP_CURVE, 
-\tCOUNTRY, 
-\tACTIVE_INDICATOR, 
-\tdeleted, 
-\tversion, 
-\tchanged_by, 
-\tupdated_at;
-
-[we_fullHistory_SET_CURVE_COUNTRY_MAPPING]:
-SELECT \"CURVE_COUNTRY_MAP_ID\",
-\t\"REGION_KEY\",
-\tCURVE,
-\t\"QP_CURVE\",
-\tCOUNTRY,
-\t\"ACTIVE_INDICATOR\",
-\tdeleted,
-\tversion,
-\t\"changed_by\",
-\t\"updated_at\"
-FROM \"shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs\".\"MRR_WB\".\"we_fullHistory_SET_CURVE_COUNTRY_MAPPING\";
-
-LOAD CURVE_COUNTRY_MAP_ID, 
-\tREGION_KEY, 
-\tCURVE, 
-\tQP_CURVE, 
-\tCOUNTRY, 
-\tACTIVE_INDICATOR, 
-\tdeleted, 
-\tversion, 
-\tchanged_by, 
-\tupdated_at;
-
-[we_History_SET_CURVE_COUNTRY_MAPPING]:
-SELECT \"CURVE_COUNTRY_MAP_ID\",
-\t\"REGION_KEY\",
-\tCURVE,
-\t\"QP_CURVE\",
-\tCOUNTRY,
-\t\"ACTIVE_INDICATOR\",
-\tdeleted,
-\tversion,
-\t\"changed_by\",
-\t\"updated_at\"
-FROM \"shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs\".\"MRR_WB\".\"we_History_SET_CURVE_COUNTRY_MAPPING\";
-
-
-///$tab PROD
-LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_PROD';
-
-LOAD UC_ID, 
-\tUNIT_FROM, 
-\tUNIT_TO, 
-\tCONVERSION_FACTOR, 
-\tRISK_CATEGORY, 
-\tACTIVE_INDICATOR, 
-\tREGION_KEY, 
-\tSTANDARD_COMMODITY_CODE, 
-\tdeleted, 
-\tversion, 
-\tchanged_by, 
-\tupdated_at;
-
-[we_data_SET_UNIT_CONVERSION]:
-SELECT \"UC_ID\",
-\t\"UNIT_FROM\",
-\t\"UNIT_TO\",
-\t\"CONVERSION_FACTOR\",
-\t\"RISK_CATEGORY\",
-\t\"ACTIVE_INDICATOR\",
-\t\"REGION_KEY\",
-\t\"STANDARD_COMMODITY_CODE\",
-\tdeleted,
-\tversion,
-\t\"changed_by\",
-\t\"updated_at\"
-FROM \"shell-31-eun-sqdw-aouyninwxgbsssfsxvov\".\"MRR_WB\".\"we_data_SET_UNIT_CONVERSION\";
-
-LOAD UC_ID, 
-\tUNIT_FROM, 
-\tUNIT_TO, 
-\tCONVERSION_FACTOR, 
-\tRISK_CATEGORY, 
-\tACTIVE_INDICATOR, 
-\tREGION_KEY, 
-\tSTANDARD_COMMODITY_CODE, 
-\tdeleted, 
-\tversion, 
-\tchanged_by, 
-\tupdated_at;
-
-[we_fullData_SET_UNIT_CONVERSION]:
-SELECT \"UC_ID\",
-\t\"UNIT_FROM\",
-\t\"UNIT_TO\",
-\t\"CONVERSION_FACTOR\",
-\t\"RISK_CATEGORY\",
-\t\"ACTIVE_INDICATOR\",
-\t\"REGION_KEY\",
-\t\"STANDARD_COMMODITY_CODE\",
-\tdeleted,
-\tversion,
-\t\"changed_by\",
-\t\"updated_at\"
-FROM \"shell-31-eun-sqdw-aouyninwxgbsssfsxvov\".\"MRR_WB\".\"we_fullData_SET_UNIT_CONVERSION\";
-
-LOAD UC_ID, 
-\tUNIT_FROM, 
-\tUNIT_TO, 
-\tCONVERSION_FACTOR, 
-\tRISK_CATEGORY, 
-\tACTIVE_INDICATOR, 
-\tREGION_KEY, 
-\tSTANDARD_COMMODITY_CODE, 
-\tdeleted, 
-\tversion, 
-\tchanged_by, 
-\tupdated_at;
-
-[we_fullHistory_SET_UNIT_CONVERSION]:
-SELECT \"UC_ID\",
-\t\"UNIT_FROM\",
-\t\"UNIT_TO\",
-\t\"CONVERSION_FACTOR\",
-\t\"RISK_CATEGORY\",
-\t\"ACTIVE_INDICATOR\",
-\t\"REGION_KEY\",
-\t\"STANDARD_COMMODITY_CODE\",
-\tdeleted,
-\tversion,
-\t\"changed_by\",
-\t\"updated_at\"
-FROM \"shell-31-eun-sqdw-aouyninwxgbsssfsxvov\".\"MRR_WB\".\"we_fullHistory_SET_UNIT_CONVERSION\";
-
-LOAD UC_ID, 
-\tUNIT_FROM, 
-\tUNIT_TO, 
-\tCONVERSION_FACTOR, 
-\tRISK_CATEGORY, 
-\tACTIVE_INDICATOR, 
-\tREGION_KEY, 
-\tSTANDARD_COMMODITY_CODE, 
-\tdeleted, 
-\tversion, 
-\tchanged_by, 
-\tupdated_at;
-
-[we_history_SET_UNIT_CONVERSION]:
-SELECT \"UC_ID\",
-\t\"UNIT_FROM\",
-\t\"UNIT_TO\",
-\t\"CONVERSION_FACTOR\",
-\t\"RISK_CATEGORY\",
-\t\"ACTIVE_INDICATOR\",
-\t\"REGION_KEY\",
-\t\"STANDARD_COMMODITY_CODE\",
-\tdeleted,
-\tversion,
-\t\"changed_by\",
-\t\"updated_at\"
-FROM \"shell-31-eun-sqdw-aouyninwxgbsssfsxvov\".\"MRR_WB\".\"we_history_SET_UNIT_CONVERSION\";
-
-
-///$tab dev
-LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_DEV';
-
-LOAD UC_ID, 
-\tUNIT_FROM, 
-\tUNIT_TO, 
-\tCONVERSION_FACTOR, 
-\tRISK_CATEGORY, 
-\tACTIVE_INDICATOR, 
-\tREGION_KEY, 
-\tSTANDARD_COMMODITY_CODE, 
-\tdeleted, 
-\tversion, 
-\tchanged_by, 
-\tupdated_at;
-
-[we_Data_SET_UNIT_CONVERSION]:
-SELECT \"UC_ID\",
-\t\"UNIT_FROM\",
-\t\"UNIT_TO\",
-\t\"CONVERSION_FACTOR\",
-\t\"RISK_CATEGORY\",
-\t\"ACTIVE_INDICATOR\",
-\t\"REGION_KEY\",
-\t\"STANDARD_COMMODITY_CODE\",
-\tdeleted,
-\tversion,
-\t\"changed_by\",
-\t\"updated_at\"
-FROM \"shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs\".\"MRR_WB\".\"we_Data_SET_UNIT_CONVERSION\";
-
-LOAD UC_ID, 
-\tUNIT_FROM, 
-\tUNIT_TO, 
-\tCONVERSION_FACTOR, 
-\tRISK_CATEGORY, 
-\tACTIVE_INDICATOR, 
-\tREGION_KEY, 
-\tSTANDARD_COMMODITY_CODE, 
-\tdeleted, 
-\tversion, 
-\tchanged_by, 
-\tupdated_at;
-
-[we_fullData_SET_UNIT_CONVERSION]:
-SELECT \"UC_ID\",
-\t\"UNIT_FROM\",
-\t\"UNIT_TO\",
-\t\"CONVERSION_FACTOR\",
-\t\"RISK_CATEGORY\",
-\t\"ACTIVE_INDICATOR\",
-\t\"REGION_KEY\",
-\t\"STANDARD_COMMODITY_CODE\",
-\tdeleted,
-\tversion,
-\t\"changed_by\",
-\t\"updated_at\"
-FROM \"shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs\".\"MRR_WB\".\"we_fullData_SET_UNIT_CONVERSION\";
-
-LOAD UC_ID, 
-\tUNIT_FROM, 
-\tUNIT_TO, 
-\tCONVERSION_FACTOR, 
-\tRISK_CATEGORY, 
-\tACTIVE_INDICATOR, 
-\tREGION_KEY, 
-\tSTANDARD_COMMODITY_CODE, 
-\tdeleted, 
-\tversion, 
-\tchanged_by, 
-\tupdated_at;
-
-[we_fullHistory_SET_UNIT_CONVERSION]:
-SELECT \"UC_ID\",
-\t\"UNIT_FROM\",
-\t\"UNIT_TO\",
-\t\"CONVERSION_FACTOR\",
-\t\"RISK_CATEGORY\",
-\t\"ACTIVE_INDICATOR\",
-\t\"REGION_KEY\",
-\t\"STANDARD_COMMODITY_CODE\",
-\tdeleted,
-\tversion,
-\t\"changed_by\",
-\t\"updated_at\"
-FROM \"shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs\".\"MRR_WB\".\"we_fullHistory_SET_UNIT_CONVERSION\";
-
-LOAD UC_ID, 
-\tUNIT_FROM, 
-\tUNIT_TO, 
-\tCONVERSION_FACTOR, 
-\tRISK_CATEGORY, 
-\tACTIVE_INDICATOR, 
-\tREGION_KEY, 
-\tSTANDARD_COMMODITY_CODE, 
-\tdeleted, 
-\tversion, 
-\tchanged_by, 
-\tupdated_at;
-
-[we_History_SET_UNIT_CONVERSION]:
-SELECT \"UC_ID\",
-\t\"UNIT_FROM\",
-\t\"UNIT_TO\",
-\t\"CONVERSION_FACTOR\",
-\t\"RISK_CATEGORY\",
-\t\"ACTIVE_INDICATOR\",
-\t\"REGION_KEY\",
-\t\"STANDARD_COMMODITY_CODE\",
-\tdeleted,
-\tversion,
-\t\"changed_by\",
-\t\"updated_at\"
-FROM \"shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs\".\"MRR_WB\".\"we_History_SET_UNIT_CONVERSION\";
-
-"
+Exit script;"
 }
