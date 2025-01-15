@@ -24,7 +24,7 @@ Script for qlik 1:
   ///$tab Section
   LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_DEV';
   
-  LOAD UC_ID AS UC_ID_ddev, 
+  LOAD UC_ID AS UC_ID_dev, 
       UNIT_FROM AS UNIT_FROM_dev, 
       UNIT_TO AS UNIT_TO_dev, 
       CONVERSION_FACTOR AS CONVERSION_FACTOR_dev, 
