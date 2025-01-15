@@ -1,89 +1,89 @@
 Script for UnknownAppName:
 
-///$tab Main
-SET ThousandSep=',';
-SET DecimalSep='.';
-SET MoneyThousandSep=',';
-SET MoneyDecimalSep='.';
-SET MoneyFormat='$#,##0.00;-$#,##0.00';
-SET TimeFormat='h:mm:ss TT';
-SET DateFormat='M/D/YYYY';
-SET TimestampFormat='M/D/YYYY h:mm:ss[.fff] TT';
-SET FirstWeekDay=6;
-SET BrokenWeeks=1;
-SET ReferenceDay=0;
-SET FirstMonthOfYear=1;
-SET CollationLocale='en-US';
-SET CreateSearchIndexOnReload=1;
-SET MonthNames='Jan;Feb;Mar;Apr;May;Jun;Jul;Aug;Sep;Oct;Nov;Dec';
-SET LongMonthNames='January;February;March;April;May;June;July;August;September;October;November;December';
-SET DayNames='Mon;Tue;Wed;Thu;Fri;Sat;Sun';
-SET LongDayNames='Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday';
-SET NumericalAbbreviation='3:k;6:M;9:G;12:T;15:P;18:E;21:Z;24:Y;-3:m;-6:μ;-9:n;-12:p;-15:f;-18:a;-21:z;-24:y';
-
-///$tab Section
-LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_DEV';
-
-LOAD UC_ID AS UC_ID_dev,
-UNIT_FROM AS UNIT_FROM_dev,
-UNIT_TO AS UNIT_TO_dev,
-CONVERSION_FACTOR AS CONVERSION_FACTOR_dev,
-RISK_CATEGORY AS RISK_CATEGORY_dev,
-ACTIVE_INDICATOR AS ACTIVE_INDICATOR_dev,
-REGION_KEY AS REGION_KEY_dev,
-STANDARD_COMMODITY_CODE AS STANDARD_COMMODITY_CODE_dev,
-deleted AS deleted_dev,
-version AS version_dev,
-changed_by AS changed_by_dev,
-updated_at AS updated_at_dev;
-
-
-[we_data_SET_UNIT_CONVERSION]:
-SELECT "UC_ID",
-"UNIT_FROM",
-"UNIT_TO",
-"CONVERSION_FACTOR",
-"RISK_CATEGORY",
-"ACTIVE_INDICATOR",
-"REGION_KEY",
-"STANDARD_COMMODITY_CODE",
-deleted,
-version,
-"changed_by",
-"updated_at"
-FROM "shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs"."MRR_WB"."we_data_SET_UNIT_CONVERSION";
-
-LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_PROD';
-
-LOAD UC_ID AS UC_ID_prod,
-UNIT_FROM AS UNIT_FROM_prod,
-UNIT_TO AS UNIT_TO_prod,
-CONVERSION_FACTOR AS CONVERSION_FACTOR_prod,
-RISK_CATEGORY AS RISK_CATEGORY_prod,
-ACTIVE_INDICATOR AS ACTIVE_INDICATOR_prod,
-REGION_KEY AS REGION_KEY_prod,
-STANDARD_COMMODITY_CODE AS STANDARD_COMMODITY_CODE_prod,
-deleted AS deleted_prod,
-version AS version_prod,
-changed_by AS changed_by_prod,
-updated_at AS updated_at_prod;
-
-
-[we_data_SET_UNIT_CONVERSION]:
-SELECT "UC_ID",
-"UNIT_FROM",
-"UNIT_TO",
-"CONVERSION_FACTOR",
-"RISK_CATEGORY",
-"ACTIVE_INDICATOR",
-"REGION_KEY",
-"STANDARD_COMMODITY_CODE",
-deleted,
-version,
-"changed_by",
-"updated_at"
-FROM "shell-31-eun-sqdw-aouyninwxgbsssfsxvov"."MRR_WB"."we_data_SET_UNIT_CONVERSION";
-
-
-///$tab exit script
-Exit script;
+ ///$tab Main
+ SET ThousandSep=',';
+ SET DecimalSep='.';
+ SET MoneyThousandSep=',';
+ SET MoneyDecimalSep='.';
+ SET MoneyFormat='$#,##0.00;-$#,##0.00';
+ SET TimeFormat='h:mm:ss TT';
+ SET DateFormat='M/D/YYYY';
+ SET TimestampFormat='M/D/YYYY h:mm:ss[.fff] TT';
+ SET FirstWeekDay=6;
+ SET BrokenWeeks=1;
+ SET ReferenceDay=0;
+ SET FirstMonthOfYear=1;
+ SET CollationLocale='en-US';
+ SET CreateSearchIndexOnReload=1;
+ SET MonthNames='Jan;Feb;Mar;Apr;May;Jun;Jul;Aug;Sep;Oct;Nov;Dec';
+ SET LongMonthNames='January;February;March;April;May;June;July;August;September;October;November;December';
+ SET DayNames='Mon;Tue;Wed;Thu;Fri;Sat;Sun';
+ SET LongDayNames='Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday';
+ SET NumericalAbbreviation='3:k;6:M;9:G;12:T;15:P;18:E;21:Z;24:Y;-3:m;-6:μ;-9:n;-12:p;-15:f;-18:a;-21:z;-24:y';
+ 
+ ///$tab Section
+ LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_DEV';
+ 
+ LOAD UC_ID AS UC_ID_dev, 
+     UNIT_FROM AS UNIT_FROM_dev, 
+     UNIT_TO AS UNIT_TO_dev, 
+     CONVERSION_FACTOR AS CONVERSION_FACTOR_dev, 
+     RISK_CATEGORY AS RISK_CATEGORY_dev, 
+     ACTIVE_INDICATOR AS ACTIVE_INDICATOR_dev, 
+     REGION_KEY AS REGION_KEY_dev, 
+     STANDARD_COMMODITY_CODE AS STANDARD_COMMODITY_CODE_dev, 
+     deleted AS deleted_dev, 
+     version AS version_dev, 
+     changed_by AS changed_by_dev, 
+     updated_at AS updated_at_dev;
+ 
+ 
+ [we_data_SET_UNIT_CONVERSION]:
+ SELECT "UC_ID",
+ 	"UNIT_FROM",
+ 	"UNIT_TO",
+ 	"CONVERSION_FACTOR",
+ 	"RISK_CATEGORY",
+ 	"ACTIVE_INDICATOR",
+ 	"REGION_KEY",
+ 	"STANDARD_COMMODITY_CODE",
+ 	deleted,
+ 	version,
+ 	"changed_by",
+ 	"updated_at"
+ FROM "shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs"."MRR_WB"."we_data_SET_UNIT_CONVERSION";
+ 
+ LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_PROD';
+ 
+ LOAD UC_ID AS UC_ID_prod, 
+     UNIT_FROM AS UNIT_FROM_prod, 
+     UNIT_TO AS UNIT_TO_prod, 
+     CONVERSION_FACTOR AS CONVERSION_FACTOR_prod, 
+     RISK_CATEGORY AS RISK_CATEGORY_prod, 
+     ACTIVE_INDICATOR AS ACTIVE_INDICATOR_prod, 
+     REGION_KEY AS REGION_KEY_prod, 
+     STANDARD_COMMODITY_CODE AS STANDARD_COMMODITY_CODE_prod, 
+     deleted AS deleted_prod, 
+     version AS version_prod, 
+     changed_by AS changed_by_prod, 
+     updated_at AS updated_at_prod;
+ 
+ 
+ [we_data_SET_UNIT_CONVERSION]:
+ SELECT "UC_ID",
+ 	"UNIT_FROM",
+ 	"UNIT_TO",
+ 	"CONVERSION_FACTOR",
+ 	"RISK_CATEGORY",
+ 	"ACTIVE_INDICATOR",
+ 	"REGION_KEY",
+ 	"STANDARD_COMMODITY_CODE",
+ 	deleted,
+ 	version,
+ 	"changed_by",
+ 	"updated_at"
+ FROM "shell-31-eun-sqdw-aouyninwxgbsssfsxvov"."MRR_WB"."we_data_SET_UNIT_CONVERSION";
+ 
+ 
+ ///$tab exit script
+ Exit script;
