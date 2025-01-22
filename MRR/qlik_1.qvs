@@ -1,4 +1,4 @@
-Script for qlik 1:
+Script for ArohiQliksense:
 
  ///$tab Main
  SET ThousandSep=',';
@@ -24,66 +24,22 @@ Script for qlik 1:
  ///$tab Section
  LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_DEV';
  
- LOAD UC_ID AS UC_ID_dev, 
-     UNIT_FROM AS UNIT_FROM_dev, 
-     UNIT_TO AS UNIT_TO_dev, 
-     CONVERSION_FACTOR AS CONVERSION_FACTOR_dev, 
-     RISK_CATEGORY AS RISK_CATEGORY_dev, 
-     ACTIVE_INDICATOR AS ACTIVE_INDICATOR_dev, 
-     REGION_KEY AS REGION_KEY_dev, 
-     STANDARD_COMMODITY_CODE AS STANDARD_COMMODITY_CODE_dev, 
-     deleted AS deleted_dev, 
-     version AS version_dev, 
-     changed_by AS changed_by_dev, 
-     updated_at AS updated_at_dev;
+ LOAD Report_Date, 
+ 	Commodity_Limits, 
+ 	Liquid_Illiquid_Type_ID, 
+ 	Desk, 
+ 	Spread_Exposure;
+ 
+ [SE_EA_Expo_Data_Calendar_Spread_Sub_Region]:
+ SELECT "Report_Date",
+ 	"Commodity_Limits",
+ 	"Liquid_Illiquid_Type_ID",
+ 	Desk,
+ 	"Spread_Exposure"
+ FROM "shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs"."MRR_SET_POC"."SE_EA_Expo_Data_Calendar_Spread_Sub_Region";
  
  
- [we_data_SET_UNIT_CONVERSION]:
- SELECT "UC_ID",
- 	"UNIT_FROM",
- 	"UNIT_TO",
- 	"CONVERSION_FACTOR",
- 	"RISK_CATEGORY",
- 	"ACTIVE_INDICATOR",
- 	"REGION_KEY",
- 	"STANDARD_COMMODITY_CODE",
- 	deleted,
- 	version,
- 	"changed_by",
- 	"updated_at"
- FROM "shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs"."MRR_WB"."we_data_SET_UNIT_CONVERSION";
- 
- LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_PROD';
- 
- LOAD UC_ID AS UC_ID_prod, 
-     UNIT_FROM AS UNIT_FROM_prod, 
-     UNIT_TO AS UNIT_TO_prod, 
-     CONVERSION_FACTOR AS CONVERSION_FACTOR_prod, 
-     RISK_CATEGORY AS RISK_CATEGORY_prod, 
-     ACTIVE_INDICATOR AS ACTIVE_INDICATOR_prod, 
-     REGION_KEY AS REGION_KEY_prod, 
-     STANDARD_COMMODITY_CODE AS STANDARD_COMMODITY_CODE_prod, 
-     deleted AS deleted_prod, 
-     version AS version_prod, 
-     changed_by AS changed_by_prod, 
-     updated_at AS updated_at_prod;
  
  
- [we_data_SET_UNIT_CONVERSION]:
- SELECT "UC_ID",
- 	"UNIT_FROM",
- 	"UNIT_TO",
- 	"CONVERSION_FACTOR",
- 	"RISK_CATEGORY",
- 	"ACTIVE_INDICATOR",
- 	"REGION_KEY",
- 	"STANDARD_COMMODITY_CODE",
- 	deleted,
- 	version,
- 	"changed_by",
- 	"updated_at"
- FROM "shell-31-eun-sqdw-aouyninwxgbsssfsxvov"."MRR_WB"."we_data_SET_UNIT_CONVERSION";
- 
- 
- ///$tab exit script
- Exit script;
+ ///$tab EXIT script
+ EXIT SCRIPT;
