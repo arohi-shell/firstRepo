@@ -24,7 +24,7 @@ Script for ArohiQliksense:
  ///$tab Section
  LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_DEV';
  
- LOAD Report_Date, 
+ LOAD Report_Date as r, 
  	Commodity_Limits, 
  	Liquid_Illiquid_Type_ID, 
  	Desk, 
