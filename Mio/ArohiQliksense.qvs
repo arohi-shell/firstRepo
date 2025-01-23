@@ -24,21 +24,53 @@ Script for ArohiQliksense:
  ///$tab Section
  LIB CONNECT TO 'QSC_STRATOS_AZURESQLDW_DEV';
  
- LOAD Report_Date as r, 
- 	Commodity_Limits, 
- 	Liquid_Illiquid_Type_ID, 
- 	Desk, 
- 	Spread_Exposure;
+ LOAD HOLIDAY_ID, 
+ 	REGION_KEY, 
+ 	HOLIDAY_DATE, 
+ 	DESCRIPTION_TEXT, 
+ 	COMMENT_TEXT, 
+ 	ACTIVE_INDICATOR, 
+ 	deleted, 
+ 	version, 
+ 	changed_by, 
+ 	updated_at;
  
- [SE_EA_Expo_Data_Calendar_Spread_Sub_Region]:
- SELECT "Report_Date",
- 	"Commodity_Limits",
- 	"Liquid_Illiquid_Type_ID",
- 	Desk,
- 	"Spread_Exposure"
- FROM "shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs"."MRR_SET_POC"."SE_EA_Expo_Data_Calendar_Spread_Sub_Region";
+ [we_data_SET_HOLIDAY_DATE_REGION]:
+ SELECT "HOLIDAY_ID",
+ 	"REGION_KEY",
+ 	"HOLIDAY_DATE",
+ 	"DESCRIPTION_TEXT",
+ 	"COMMENT_TEXT",
+ 	"ACTIVE_INDICATOR",
+ 	deleted,
+ 	version,
+ 	"changed_by",
+ 	"updated_at"
+ FROM "shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs"."MRR_WB"."we_data_SET_HOLIDAY_DATE_REGION";
  
+ LOAD HOLIDAY_ID, 
+ 	REGION_KEY, 
+ 	HOLIDAY_DATE, 
+ 	DESCRIPTION_TEXT, 
+ 	COMMENT_TEXT, 
+ 	ACTIVE_INDICATOR, 
+ 	deleted, 
+ 	version, 
+ 	changed_by, 
+ 	updated_at;
  
+ [we_fullData_SET_HOLIDAY_DATE_REGION]:
+ SELECT "HOLIDAY_ID",
+ 	"REGION_KEY",
+ 	"HOLIDAY_DATE",
+ 	"DESCRIPTION_TEXT",
+ 	"COMMENT_TEXT",
+ 	"ACTIVE_INDICATOR",
+ 	deleted,
+ 	version,
+ 	"changed_by",
+ 	"updated_at"
+ FROM "shell-01-eun-sqdw-ozhfvgkpywdelrzitnfs"."MRR_WB"."we_fullData_SET_HOLIDAY_DATE_REGION";
  
  
  ///$tab EXIT script
